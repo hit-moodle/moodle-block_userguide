@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/userguide/db" VERSION="20110615" COMMENT="XMLDB file for Moodle userguide block"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="userguide_class" COMMENT="the comment about userguide_class" NEXT="userguide_steps">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="16" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="status"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="description"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="userguide_steps" COMMENT="the comment about userguide_class" PREVIOUS="userguide_class" NEXT="userguide_orders">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="title"/>
+        <FIELD NAME="title" TYPE="char" LENGTH="32" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" PREVIOUS="title" NEXT="position"/>
+        <FIELD NAME="position" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="description" NEXT="class"/>
+        <FIELD NAME="class" TYPE="char" LENGTH="64" NOTNULL="true" SEQUENCE="false" PREVIOUS="position"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="userguide_orders" COMMENT="the comment about userguide_guide" PREVIOUS="userguide_steps" NEXT="userguide_record">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="ccid"/>      
+        <FIELD NAME="ccid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="sid"/>
+        <FIELD NAME="sid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="ccid" NEXT="oid"/>
+        <FIELD NAME="oid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="sid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="sid"/>
+        <KEY NAME="sid" TYPE="foreign" FIELDS="sid" REFTABLE="userguide_steps" REFFIELDS="id" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="userguide_record" COMMENT="the comment about userguide_class" PREVIOUS="userguide_orders">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="uid"/>
+        <FIELD NAME="uid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="id" NEXT="cid"/>
+        <FIELD NAME="cid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="uid" NEXT="sid"/>
+        <FIELD NAME="sid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="cid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="uid"/>
+        <KEY NAME="uid" TYPE="foreign" FIELDS="uid" REFTABLE="user" REFFIELDS="id" PREVIOUS="primary" NEXT="cid"/>
+        <KEY NAME="cid" TYPE="foreign" FIELDS="cid" REFTABLE="userguide_class" REFFIELDS="id" PREVIOUS="uid" />
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
