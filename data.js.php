@@ -7,6 +7,7 @@ $query = 'select `oid`, `sid`, `title`, `description`, `position`, `class` from 
 
 $DB->execute('SET NAMES gbk');
 
+echo 'UserGuide.list = [';
 $result= $DB->get_records_sql($query);		
 foreach($result as $key => $value){
 	$title = $result[$key]->title;
@@ -17,5 +18,6 @@ foreach($result as $key => $value){
 	$class = $result[$key]->class;
 	echo "{"."\"oid\"".':'.$oid.','."\"sid\"".':'.$sid.','."\"title\"".':'."\"$title\"".','."\"content\"".':'."\"$description\"".','."\"position\"".':'."\"$position\"".','."\"cls\"".':'."\"$class\""."},","\n";
 }
+echo '];';
 
 ?>
