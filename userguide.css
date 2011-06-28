@@ -1,0 +1,38 @@
+#userguide-overlay {
+    background-color: #fafafa;
+    border-left: #dddddd 1px solid;
+    border-right: #dddddd 1px solid;
+    border-bottom: #dddddd 1px solid;
+}
+
+#userguide-control {
+    float: right;
+    padding: 7px 5px;
+}
+
+#userguide-hd{
+    margin:0;
+}
+
+#userguide-content {
+    padding: 15px 15px;
+    height: 80px;
+    width: 259px;
+    background-image: url('pix/point.png');
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+#userguide-point {
+    width: 52px;
+    height: 120px;
+    float: right;
+}
+
+#userguide-nav {
+    text-align: right;
+}
+
+#userguide-nav a{
+    padding: 5px 5px;
+}
