@@ -5,8 +5,6 @@ global $DB;
 
 $query = 'select `oid`, `sid`, `title`, `description`, `position`, `class` from `mdl_userguide_orders` as uo, `mdl_userguide_steps` as us where uo.sid=us.id order by `oid`;';
 
-$DB->execute('SET NAMES gbk');
-
 $result= $DB->get_records_sql($query);		
 foreach($result as $key => $value){
 	$title = $result[$key]->title;
@@ -19,3 +17,6 @@ foreach($result as $key => $value){
 }
 
 ?>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head>
+</html>
